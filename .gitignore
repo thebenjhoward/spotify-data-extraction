@@ -2,6 +2,7 @@
 data/
 auth/
 output/
+.empty/
 
 
 # Byte-compiled / optimized / DLL files

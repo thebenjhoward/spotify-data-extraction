@@ -44,7 +44,7 @@ def parse_playlists(lists_json, songs=None):
         songs = defaultdict(int)
 
     for playlist in lists:
-        if(playlist["num_samples"] != 0):
+        if(playlist["num_tracks"] != 0):
             for song in playlist["tracks"]:
                 song_id = song["track_uri"][14:]
                 songs[song_id] += 1
@@ -64,8 +64,12 @@ if __name__ == "__main__":
 
     songs_dict = defaultdict(int)
     for path in sys.argv[2:]:
+        print("Loading '" + path + "'...", end='')
         playlists = load_json(path)
+        print("done")
+        print("Parsing...", end='')
         parse_playlists(playlists, songs=songs_dict)
+        print("done")
     
     with open(sys.argv[1], 'w') as o:
         json.dump(songs_dict, o)
